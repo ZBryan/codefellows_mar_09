@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello From Html</title>
+  <script src="bundle.js"></script>
+</head>
+<body data-ng-app="notesApp">
+  <main data-ng-controller="notesController" data-ng-init="getAll()">
+    <h1>Notes:</h1>
+    <form name="newNoteName">
+      <label for="newNote">New Note</label>
+      <input type="text" id="newNoteBody" data-ng-model="newNote.noteBody">
+      <button type="submit" data-ng-click="create(newNote)">Save New Note</button>
+    </form>
+    <ul data-ng-repeat="note in notes" data-ng-cloak>
+      <li>
+        {{note.noteBody}}
+        <form data-ng-if="note.editing">
+          <label for="note{{note._id}}"></label>
+          <input type="text" id="note{{note.id}}" data-ng-model="note.noteBody">
+          <button type="submit" data-ng-click="save(note)">Save Changes</button>
+          <button type="button" data-ng-click="toggleEdit(note)">Cancel</button>
+        </form>
+        <button data-ng-click="toggleEdit(note)" data-ng-if="!note.editing">Edit Note</button>
+        <button data-ng-click="remove(note)">Delete Note</button>
+      </li>
+    </ul>
+  </main>
+
+
+</body>
+</html>
